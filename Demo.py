@@ -13,9 +13,10 @@ model_old = tensorflow.keras.models.load_model("model_keras.h5")
 classes = ["R", "U", "I", "N", "G", "Z", "T", "S", "A", "F", "O", "H", " ", "M", "J", "C", "D", "V", "Q", "X", "E", "B", "K", "L", "Y", "P", "W"]
 
 word = ""
-#Install:
+# pip Install:
 # Tenorflow
-# pip install Pillow==9.5.0
+# Pillow==9.5.0
+# opencv-python
 
 # Open the webcam
 #0 for default:
