@@ -59,3 +59,4 @@ if __name__ == '__main__':
 # In a separate terminal or command prompt, navigate to the directory containing the ngrok executable.
 # 3. 
 # Run the following command: ./ngrok http 5000 (or ngrok http 5000 on Windows).
+# (there might be some weird error about a auth token, just follow the link and instructions in link, take 1 min then it should work)
