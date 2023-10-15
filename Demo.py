@@ -1,5 +1,18 @@
-import tensorflow
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+install("numpy")
+install("tensorflow")
+install("Pillow==9.5.0")
+install("opencv-python")
+
+
 import numpy
+import tensorflow
+
 from PIL import Image
 import os
 import cv2
