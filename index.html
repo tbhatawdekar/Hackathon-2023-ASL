@@ -4,14 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Started</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Sample Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif; /* Updated font family */
+            background-color: #f5e6ca; /* Pastel beige background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Set the body height to 100% of the viewport height */
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px 60px; /* Adjust padding to shift the text to the right */
+            background-color: #ffffff;
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Set maximum width for the white box */
+            width: 100%; /* Ensure the box takes 100% width within its container */
+            line-height: 1.6; /* Adjust line-height to vertically center the text */
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #3498db;
+            margin-bottom: 40px;
+            max-width: 100%; /* Set maximum width for the text */
+            font-size: 22px; /* Increased text size for aesthetics */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #3498db;
+            border-radius: 25px; /* More rounded corners */
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .logo {
+            width: 50px; /* Set the width of your logo */
+            height: 50px; /* Set the height of your logo */
+            margin-right: 10px; /* Add some space between the logo and text */
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Get Started!</h1>
+        <img src="logo.png" alt="Logo" class="logo"> <!-- Add your logo image here -->
+        <h1>SignScribe</h1>
+        <p>SignScribe is designed to make online video conferencing more accessible for the deaf community. Explore our dynamic AI model, which scribes ASL sign video feed into English subtitles! </p>
         <a href="nextpage.html" class="btn">Click to Begin</a>
     </div>
 </body>
