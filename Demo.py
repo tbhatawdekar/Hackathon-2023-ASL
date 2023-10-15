@@ -7,9 +7,9 @@ import numpy as np
 from contextlib import redirect_stdout
 
 # pip Install:
-# Tenorflow
+# Tensorflow
 # Pillow==9.5.0
-# opencv-python
+# opencv-pythos
 
 
 model = tensorflow.keras.models.load_model("model_keras.h5")
