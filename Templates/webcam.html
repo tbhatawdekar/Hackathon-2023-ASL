@@ -8,6 +8,7 @@
 <body>
     <video id="webcam" width="640" height="480" autoplay></video>
     <button id="capture" class="btn">Append Letter</button>
+    <button id="space" class="btn">Add Space</button>
     <button id="reset" class="btn">Reset Word</button>
     
     <p>Predicted Class: <span id="predicted_class"></span></p>
@@ -16,6 +17,7 @@
     <script>
         const webcamElement = document.getElementById('webcam');
         const captureButton = document.getElementById('capture');
+        const spaceButton = document.getElementById('space');
         const resetButton = document.getElementById('reset');
         const predictedClassElement = document.getElementById('predicted_class');
         const wordElement = document.getElementById('word');
@@ -51,6 +53,11 @@
 
         captureButton.addEventListener('click', () => {
             word += predictedClassElement.textContent;
+            wordElement.textContent = word;
+        });
+
+        spaceButton.addEventListener('click', () => {
+            word += " ";
             wordElement.textContent = word;
         });
 
