@@ -55,14 +55,12 @@ while True:
     predicted_class = classes[predicted_class_index]
     
     # Print the predicted class
-    # print("", end="\b")
     os.system('cls' if os.name == 'nt' else 'clear')
     print("TEXT: ", word)
     print(predicted_class)
 
     if key == 32:  # 32 is the ASCII value for space
         word += predicted_class
-        # print(predicted_class, end=" ")
     
     # If 'q' is pressed, exit the loop
     elif key == ord('q'):
