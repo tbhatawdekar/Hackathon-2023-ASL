@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam App</title>
+</head>
+<body>
+    <video id="webcam" width="640" height="480" autoplay></video>
+    <button id="capture">Append Letter</button>
+    <button id="reset">Reset Word</button>
+    <p>Predicted Class: <span id="predicted_class"></span></p>
+    <p>Word: <span id="word"></span></p>
+
+    <script>
+        const webcamElement = document.getElementById('webcam');
+        const captureButton = document.getElementById('capture');
+        const resetButton = document.getElementById('reset');
+        const predictedClassElement = document.getElementById('predicted_class');
+        const wordElement = document.getElementById('word');
+        let frameCounter = 0;
+        let word = "";
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                webcamElement.srcObject = stream;
+            });
+
+        setInterval(() => {
+            frameCounter++;
+            if (frameCounter % 5 === 0) {
+                const canvas = document.createElement('canvas');
+                canvas.width = webcamElement.videoWidth;
+                canvas.height = webcamElement.videoHeight;
+                canvas.getContext('2d').drawImage(webcamElement, 0, 0);
+                canvas.toBlob(blob => {
+                    const formData = new FormData();
+                    formData.append('image', blob);
+                    fetch('/get_prediction', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        predictedClassElement.textContent = data.predicted_class;
+                    });
+                });
+            }
+        }, 100);  // Check every 100ms
+
+        captureButton.addEventListener('click', () => {
+            word += predictedClassElement.textContent;
+            wordElement.textContent = word;
+        });
+
+        resetButton.addEventListener('click', () => {
+            word = "";
+            wordElement.textContent = word;
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5e6ca;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 300px; /* Adjust the width of the logo */
+            height: auto; /* Automatically adjust the height to maintain aspect ratio */
+            margin-right: 10px;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px 60px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #3498db;
+            margin-bottom: 40px;
+            max-width: 100%;
+            font-size: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #3498db;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+   
+</body>
+</html>
