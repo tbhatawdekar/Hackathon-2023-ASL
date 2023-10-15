@@ -47,4 +47,15 @@ def get_prediction():
     return jsonify({'predicted_class': predicted_class})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
+
+# TO RUN ANYWHERE ON NETWORK INSTEAD OF JUST THIS DEVICE:
+# 1. 
+# Go to ngrok's download page and download the appropriate version for your OS.
+# Unzip the downloaded file to get the ngrok executable.
+# Expose Your Flask App:
+# 2.
+# Run your Flask app as usual.
+# In a separate terminal or command prompt, navigate to the directory containing the ngrok executable.
+# 3. 
+# Run the following command: ./ngrok http 5000 (or ngrok http 5000 on Windows).
