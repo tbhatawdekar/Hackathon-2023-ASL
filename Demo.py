@@ -7,6 +7,7 @@ import numpy as np
 from contextlib import redirect_stdout
 
 model = tensorflow.keras.models.load_model("model_keras.h5")
+
 classes = ["R", "U", "I", "N", "G", "Z", "T", "S", "A", "F", "O", "H", " ", "M", "J", "C", "D", "V", "Q", "X", "E", "B", "K", "L", "Y", "P", "W"]
 
 word = ""
