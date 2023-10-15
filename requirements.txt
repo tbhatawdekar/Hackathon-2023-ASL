@@ -1,0 +1,10 @@
+#Tested with Python 3.9.6:
+tensorflow==2.14.0
+tensorflow-estimator==2.14.0
+tensorflow-intel==2.14.0
+tensorflow-io-gcs-filesystem==0.31.0
+Pillow==9.5.0
+opencv-python==4.8.1.78
+numpy==1.26.1
+keras==2.14.0
+Flask-Cors==4.0.0

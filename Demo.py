@@ -1,13 +1,13 @@
 import subprocess
 import sys
 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+# def install(package):
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-install("numpy")
-install("tensorflow")
-install("Pillow==9.5.0")
-install("opencv-python")
+# install("numpy")
+# install("tensorflow")
+# install("Pillow==9.5.0")
+# install("opencv-python")
 
 
 import numpy

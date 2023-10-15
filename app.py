@@ -8,10 +8,10 @@ from io import BytesIO
 import subprocess
 import sys
 
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+# def install(package):
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-install("Flask-Cors")
+# install("Flask-Cors")
 
 app = Flask(__name__)
 CORS(app)
