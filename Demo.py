@@ -6,22 +6,26 @@ import cv2
 import numpy as np
 from contextlib import redirect_stdout
 
-model = tensorflow.keras.models.load_model("efficientnet.h5")
-model_old = tensorflow.keras.models.load_model("model_keras.h5")
+# pip Install:
+# Tenorflow
+# Pillow==9.5.0
+# opencv-python
+
+
+model = tensorflow.keras.models.load_model("model_keras.h5")
 
 classes = ["R", "U", "I", "N", "G", "Z", "T", "S", "A", "F", "O", "H", " ", "M", "J", "C", "D", "V", "Q", "X", "E", "B", "K", "L", "Y", "P", "W"]
 
 word = ""
-#Install:
-# Tenorflow
-# pip install Pillow==9.5.0
+
 
 # Open the webcam
-#0 for default:
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: Could not open webcam.")
     exit()
+
+frame_counter = 0  # Initialize frame counter
 
 while True:
     # Capture frame-by-frame
@@ -39,39 +43,29 @@ while True:
     # Check for user input
     key = cv2.waitKey(1) & 0xFF
 
+    frame_counter += 1  # Increment frame counter
 
+    if frame_counter % 5 == 0:  # Process every 5th frame
+        # Preprocess the image for the model
+        img = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)).convert('RGB')
+        img = img.resize((300, 300 * img.size[1] // img.size[0]), Image.ANTIALIAS)
+        inp_numpy = numpy.array(img)[None]
 
-    # Preprocess the image for the model
-    img = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)).convert('RGB')
-    img = img.resize((300, 300 * img.size[1] // img.size[0]), Image.ANTIALIAS)
-    inp_numpy = numpy.array(img)[None]
-
-    # Get the predictions
-    with redirect_stdout(open(os.devnull, 'w')):
-        class_scores = model.predict(inp_numpy)[0]
-    
-    # Find the class with the highest score
-    predicted_class_index = np.argmax(class_scores)
-    predicted_class = classes[predicted_class_index]
-    
-    # Get the predictions
-    with redirect_stdout(open(os.devnull, 'w')):
-        class_scores_old = model_old.predict(inp_numpy)[0]
-    
-    # Find the class with the highest score
-    predicted_class_index_old = np.argmax(class_scores_old)
-    predicted_class_old = classes[predicted_class_index_old]
-    
-    # Print the predicted class
-    # print("", end="\b")
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("TEXT: ", word)
-    print(predicted_class)
-    print(predicted_class_old)
+        # Get the predictions
+        with redirect_stdout(open(os.devnull, 'w')):
+            class_scores = model.predict(inp_numpy)[0]
+        
+        # Find the class with the highest score
+        predicted_class_index = np.argmax(class_scores)
+        predicted_class = classes[predicted_class_index]
+        
+        # Print the predicted class
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("TEXT: ", word)
+        print(predicted_class)
 
     if key == 32:  # 32 is the ASCII value for space
         word += predicted_class
-        # print(predicted_class, end=" ")
     
     # If 'q' is pressed, exit the loop
     elif key == ord('q'):
