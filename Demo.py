@@ -6,8 +6,9 @@ import cv2
 import numpy as np
 from contextlib import redirect_stdout
 
-model_name = "model_keras"
-model = tensorflow.keras.models.load_model(model_name+".h5")
+
+model = tensorflow.keras.models.load_model("efficientnet.h5")
+model_old = tensorflow.keras.models.load_model("model_keras.h5")
 
 classes = ["R", "U", "I", "N", "G", "Z", "T", "S", "A", "F", "O", "H", " ", "M", "J", "C", "D", "V", "Q", "X", "E", "B", "K", "L", "Y", "P", "W"]
 
@@ -54,11 +55,20 @@ while True:
     predicted_class_index = np.argmax(class_scores)
     predicted_class = classes[predicted_class_index]
     
+    # Get the predictions
+    with redirect_stdout(open(os.devnull, 'w')):
+        class_scores_old = model_old.predict(inp_numpy)[0]
+    
+    # Find the class with the highest score
+    predicted_class_index_old = np.argmax(class_scores_old)
+    predicted_class_old = classes[predicted_class_index_old]
+    
     # Print the predicted class
     # print("", end="\b")
     os.system('cls' if os.name == 'nt' else 'clear')
     print("TEXT: ", word)
     print(predicted_class)
+    print(predicted_class_old)
 
     if key == 32:  # 32 is the ASCII value for space
         word += predicted_class
