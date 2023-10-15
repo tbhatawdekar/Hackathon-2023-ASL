@@ -9,7 +9,8 @@ from contextlib import redirect_stdout
 # pip Install:
 # Tensorflow
 # Pillow==9.5.0
-# opencv-pythos
+# opencv-python
+
 
 
 model = tensorflow.keras.models.load_model("model_keras.h5")
